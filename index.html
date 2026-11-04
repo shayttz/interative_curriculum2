@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Currículo Interativo - Guilherme Azevedo</title>
     
+    <!-- Favicon do Currículo (Ícone Vetorial de TI/Redes) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232c3e50'/><path d='M25 30h50v12H25zm0 20h50v12H25zm0 20h50v12H25z' fill='%233498db'/><circle cx='35' cy='36' r='2' fill='%23fff'/><circle cx='35' cy='56' r='2' fill='%23fff'/><circle cx='35' cy='76' r='2' fill='%23fff'/></svg>">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -328,6 +331,9 @@
             }
         }
 
+        /* =======================================================
+           REGRAS DE IMPRESSÃO (CTRL+P) - AJUSTADAS PARA A4 E LEITURA
+           ======================================================= */
         @media print {
             @page {
                 size: A4 portrait;
@@ -362,7 +368,7 @@
                 height: 297mm !important;
                 background-color: #2c3e50 !important;
                 color: #ecf0f1 !important;
-                padding: 8mm 3mm !important;
+                padding: 10mm 4mm !important;
                 box-sizing: border-box !important;
                 justify-content: flex-start !important;
                 -webkit-print-color-adjust: exact !important;
@@ -372,9 +378,9 @@
             }
 
             .profile-pic {
-                width: 70px !important;
-                height: 70px !important;
-                margin-bottom: 4px !important;
+                width: 75px !important;
+                height: 75px !important;
+                margin-bottom: 6px !important;
                 border-width: 2px !important;
                 border-color: #3498db !important;
                 -webkit-print-color-adjust: exact !important;
@@ -382,60 +388,60 @@
             }
 
             .sidebar h1 {
-                font-size: 1.2em !important;
+                font-size: 1.25em !important;
                 margin: 2px 0 !important;
                 color: #fff !important;
             }
 
             .sidebar p.subtitle {
-                font-size: 0.68em !important;
-                margin-bottom: 2px !important;
-                line-height: 1.15 !important;
+                font-size: 0.7em !important;
+                margin-bottom: 4px !important;
+                line-height: 1.2 !important;
                 color: #bdc3c7 !important;
             }
 
             .sidebar p.location {
-                font-size: 0.62em !important;
+                font-size: 0.65em !important;
                 margin-bottom: 2px !important;
                 color: #3498db !important;
             }
 
             .cnh-tag {
-                font-size: 0.62em !important;
+                font-size: 0.65em !important;
                 color: #f1c40f !important;
-                margin-bottom: 4px !important;
+                margin-bottom: 6px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
 
             .social-links {
-                gap: 4px !important;
-                margin-top: 6px !important;
-                margin-bottom: 4px !important;
+                gap: 6px !important;
+                margin-top: 8px !important;
+                margin-bottom: 6px !important;
             }
 
             .social-links a {
-                font-size: 0.6em !important;
+                font-size: 0.62em !important;
                 color: #ecf0f1 !important;
             }
 
             .social-links a i {
-                font-size: 0.9em !important;
-                margin-bottom: 1px !important;
+                font-size: 0.95em !important;
+                margin-bottom: 2px !important;
             }
 
             .social-links a span.url-text {
-                font-size: 0.55em !important;
+                font-size: 0.58em !important;
                 color: #ecf0f1 !important;
             }
 
             .contact-email {
-                margin-bottom: 4px !important;
+                margin-bottom: 6px !important;
             }
 
             .contact-email a {
-                font-size: 0.6em !important;
-                gap: 3px !important;
+                font-size: 0.62em !important;
+                gap: 4px !important;
                 color: #ecf0f1 !important;
             }
 
@@ -445,21 +451,21 @@
 
             .print-link {
                 display: block !important;
-                font-size: 0.6em !important;
-                margin-top: 6px !important;
-                line-height: 1.15 !important;
+                font-size: 0.62em !important;
+                margin-top: 10px !important;
+                line-height: 1.2 !important;
             }
 
             .qr-code-img {
                 display: block !important;
-                width: 75px !important;
-                height: 75px !important;
+                width: 78px !important;
+                height: 78px !important;
             }
 
             .main-content {
                 flex: 1 !important;
                 height: 297mm !important;
-                padding: 6mm 6mm 4mm 6mm !important;
+                padding: 7mm 7mm 5mm 7mm !important;
                 box-sizing: border-box !important;
             }
 
@@ -468,25 +474,25 @@
                 opacity: 1 !important;
                 transform: none !important;
                 animation: none !important;
-                padding-bottom: 4px !important;
+                padding-bottom: 6px !important;
                 margin-bottom: 0 !important;
             }
 
             .page-section h2 {
-                font-size: 0.88em !important;
-                margin-bottom: 3px !important;
-                margin-top: 2px !important;
+                font-size: 0.92em !important;
+                margin-bottom: 4px !important;
+                margin-top: 3px !important;
                 text-align: left !important;
                 border-bottom: 1.5px solid #3498db !important;
-                padding-bottom: 1px !important;
+                padding-bottom: 2px !important;
                 color: #3498db !important;
             }
 
             .summary-card {
-                padding: 4px 6px !important;
-                font-size: 0.66em !important;
-                line-height: 1.2 !important;
-                border-left-width: 3px !important;
+                padding: 6px 8px !important;
+                font-size: 0.68em !important;
+                line-height: 1.25 !important;
+                border-left-width: 3.5px !important;
                 background-color: #ecf0f1 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -495,12 +501,12 @@
             .card-list {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
-                gap: 4px !important;
+                gap: 5px !important;
             }
 
             .card-list li {
-                padding: 4px 5px !important;
-                font-size: 0.64em !important;
+                padding: 5px 7px !important;
+                font-size: 0.66em !important;
                 border-radius: 4px !important;
                 background-color: #ecf0f1 !important;
                 -webkit-print-color-adjust: exact !important;
@@ -511,35 +517,35 @@
                 font-size: 1em !important; 
                 padding: 0 !important;
                 margin-bottom: 1px !important;
-                line-height: 1.15 !important;
+                line-height: 1.18 !important;
                 background-color: transparent !important;
             }
 
             .card-list li h3 {
-                font-size: 0.82em !important;
-                margin-bottom: 1px !important;
+                font-size: 0.85em !important;
+                margin-bottom: 2px !important;
                 color: #2c3e50 !important;
             }
 
             .card-list li .date {
-                font-size: 0.72em !important;
-                margin-bottom: 2px !important;
+                font-size: 0.74em !important;
+                margin-bottom: 3px !important;
             }
 
             .card-list li p {
-                font-size: 0.95em !important;
-                margin: 1px 0 !important;
-                line-height: 1.15 !important;
+                font-size: 0.98em !important;
+                margin: 2px 0 !important;
+                line-height: 1.18 !important;
             }
 
             .card-list li ul {
-                padding-left: 10px !important;
-                margin: 1px 0 !important;
+                padding-left: 12px !important;
+                margin: 2px 0 !important;
             }
 
             .card-list li i.skill-icon {
-                font-size: 0.85em !important;
-                margin-right: 3px !important;
+                font-size: 0.88em !important;
+                margin-right: 4px !important;
                 color: #3498db !important;
             }
 
@@ -584,10 +590,10 @@
         <p class="cnh-tag"><i class="fas fa-id-card"></i> CNH Categoria B</p>
 
         <div class="print-link">
-            <a href="https://shayttz.github.io/interative_curriculum/" target="_blank" style="color: #3498db; text-decoration: none;">
+            <a href="https://shayttz.github.io/interative_curriculum2/" target="_blank" style="color: #3498db; text-decoration: none;">
                 Clique ou aponte a câmera para ver a versão interativa:
             </a>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shayttz.github.io/interative_curriculum/" alt="QR Code Currículo Interativo" class="qr-code-img">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shayttz.github.io/interative_curriculum2/" alt="QR Code Currículo Interativo" class="qr-code-img">
         </div>
 
         <div class="sidebar-menu">
