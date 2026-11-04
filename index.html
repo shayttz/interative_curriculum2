@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo Interativo - Guilherme Azevedo</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f5f7fa;
+            color: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .curriculo-container {
+            display: flex;
+            width: 1200px;
+            max-width: 90%;
+            height: 850px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        .sidebar {
+            width: 350px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #3498db;
+            object-fit: cover;
+            object-position: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar h1 {
+            font-size: 2.2em;
+            margin: 10px 0 5px 0;
+            color: #fff;
+        }
+
+        .sidebar p.subtitle {
+            font-style: italic;
+            margin-bottom: 5px;
+            color: #bdc3c7;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .sidebar p.location {
+            color: #3498db;
+            font-size: 0.88em;
+            margin-top: 2px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 15px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .social-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.85em;
+            flex: 1;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a i {
+            font-size: 1.6em;
+            margin-bottom: 4px;
+        }
+
+        .social-links a span.url-text {
+            font-size: 0.72em;
+            color: #bdc3c7;
+            word-break: break-all;
+            margin-top: 2px;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+
+        .social-links a:hover span.url-text {
+            color: #3498db;
+        }
+
+        .contact-email {
+            margin-bottom: 10px;
+        }
+
+        .contact-email a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 0.88em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-email a:hover {
+            color: #3498db;
+        }
+
+        .cnh-tag {
+            color: #f1c40f;
+            font-size: 0.88em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .print-link {
+            display: none;
+            color: #3498db;
+            font-size: 0.8em;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .qr-code-img {
+            display: none;
+            width: 85px;
+            height: 85px;
+            margin: 8px auto 0 auto;
+            border-radius: 6px;
+            border: 2px solid #fff;
+        }
+
+        .sidebar-menu {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .sidebar-menu a {
+            background-color: #34495e;
+            color: #fff;
+            padding: 14px 20px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: left;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 0.95em;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: #3498db;
+            transform: translateX(4px);
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #fff;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .page-section {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+            padding-bottom: 20px;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-section h2 {
+            font-size: 2.2em;
+            color: #3498db;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .summary-card {
+            background-color: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            line-height: 1.7;
+            font-size: 1.05em;
+            color: #444;
+            border-left: 5px solid #3498db;
+        }
+
+        .card-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-list li {
+            background-color: #ecf0f1;
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-list li:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-list li h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+
+        .card-list li .date {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .card-list li p {
+            margin: 6px 0;
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .card-list li ul {
+            padding-left: 18px;
+            margin: 8px 0;
+        }
+
+        .card-list li ul li {
+            background: none;
+            padding: 0;
+            box-shadow: none;
+            border-radius: 0;
+            margin-bottom: 6px;
+            list-style-type: disc;
+        }
+
+        .card-list li ul li:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .card-list li i.skill-icon {
+            color: #3498db;
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        .languages-list {
+            grid-template-columns: repeat(3, 1fr) !important;
+            text-align: center;
+        }
+
+        .languages-list li h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 850px) {
+            .curriculo-container {
+                flex-direction: column;
+                height: auto;
+                min-height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 30px 20px;
+            }
+
+            .main-content {
+                padding: 25px;
+            }
+
+            .languages-list {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                width: 210mm;
+                height: 297mm;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #fff !important;
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .curriculo-container {
+                width: 210mm !important;
+                height: 297mm !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                display: flex !important;
+                flex-direction: row !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .sidebar {
+                width: 62mm !important;
+                height: 297mm !important;
+                background-color: #2c3e50 !important;
+                color: #ecf0f1 !important;
+                padding: 8mm 3mm !important;
+                box-sizing: border-box !important;
+                justify-content: flex-start !important;
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                box-shadow: inset 0 0 0 1000px #2c3e50 !important;
+            }
+
+            .profile-pic {
+                width: 70px !important;
+                height: 70px !important;
+                margin-bottom: 4px !important;
+                border-width: 2px !important;
+                border-color: #3498db !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .sidebar h1 {
+                font-size: 1.2em !important;
+                margin: 2px 0 !important;
+                color: #fff !important;
+            }
+
+            .sidebar p.subtitle {
+                font-size: 0.68em !important;
+                margin-bottom: 2px !important;
+                line-height: 1.15 !important;
+                color: #bdc3c7 !important;
+            }
+
+            .sidebar p.location {
+                font-size: 0.62em !important;
+                margin-bottom: 2px !important;
+                color: #3498db !important;
+            }
+
+            .cnh-tag {
+                font-size: 0.62em !important;
+                color: #f1c40f !important;
+                margin-bottom: 4px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .social-links {
+                gap: 4px !important;
+                margin-top: 6px !important;
+                margin-bottom: 4px !important;
+            }
+
+            .social-links a {
+                font-size: 0.6em !important;
+                color: #ecf0f1 !important;
+            }
+
+            .social-links a i {
+                font-size: 0.9em !important;
+                margin-bottom: 1px !important;
+            }
+
+            .social-links a span.url-text {
+                font-size: 0.55em !important;
+                color: #ecf0f1 !important;
+            }
+
+            .contact-email {
+                margin-bottom: 4px !important;
+            }
+
+            .contact-email a {
+                font-size: 0.6em !important;
+                gap: 3px !important;
+                color: #ecf0f1 !important;
+            }
+
+            .sidebar-menu {
+                display: none !important;
+            }
+
+            .print-link {
+                display: block !important;
+                font-size: 0.6em !important;
+                margin-top: 6px !important;
+                line-height: 1.15 !important;
+            }
+
+            .qr-code-img {
+                display: block !important;
+                width: 75px !important;
+                height: 75px !important;
+            }
+
+            .main-content {
+                flex: 1 !important;
+                height: 297mm !important;
+                padding: 6mm 6mm 4mm 6mm !important;
+                box-sizing: border-box !important;
+            }
+
+            .page-section {
+                display: block !important;
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+                padding-bottom: 4px !important;
+                margin-bottom: 0 !important;
+            }
+
+            .page-section h2 {
+                font-size: 0.88em !important;
+                margin-bottom: 3px !important;
+                margin-top: 2px !important;
+                text-align: left !important;
+                border-bottom: 1.5px solid #3498db !important;
+                padding-bottom: 1px !important;
+                color: #3498db !important;
+            }
+
+            .summary-card {
+                padding: 4px 6px !important;
+                font-size: 0.66em !important;
+                line-height: 1.2 !important;
+                border-left-width: 3px !important;
+                background-color: #ecf0f1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .card-list {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 4px !important;
+            }
+
+            .card-list li {
+                padding: 4px 5px !important;
+                font-size: 0.64em !important;
+                border-radius: 4px !important;
+                background-color: #ecf0f1 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .card-list li ul li {
+                font-size: 1em !important; 
+                padding: 0 !important;
+                margin-bottom: 1px !important;
+                line-height: 1.15 !important;
+                background-color: transparent !important;
+            }
+
+            .card-list li h3 {
+                font-size: 0.82em !important;
+                margin-bottom: 1px !important;
+                color: #2c3e50 !important;
+            }
+
+            .card-list li .date {
+                font-size: 0.72em !important;
+                margin-bottom: 2px !important;
+            }
+
+            .card-list li p {
+                font-size: 0.95em !important;
+                margin: 1px 0 !important;
+                line-height: 1.15 !important;
+            }
+
+            .card-list li ul {
+                padding-left: 10px !important;
+                margin: 1px 0 !important;
+            }
+
+            .card-list li i.skill-icon {
+                font-size: 0.85em !important;
+                margin-right: 3px !important;
+                color: #3498db !important;
+            }
+
+            .languages-list {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="curriculo-container">
+    <div class="sidebar">
+        <img src="https://i.ibb.co/JWdTCg2Z/me.jpg" alt="Foto de Perfil de Guilherme Azevedo" class="profile-pic">
+        <div class="profile-info">
+            <h1>Guilherme Azevedo</h1>
+            <p class="subtitle">Auxiliar de Logística<br>Operações e Estoque</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> Volta Redonda - RJ</p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://github.com/shayttz" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+                <span class="url-text">github.com/shayttz</span>
+            </a>
+            
+            <a href="https://wa.me/5524981045004" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+                <span class="url-text">(24) 98104-5004</span>
+            </a>
+        </div>
+
+        <div class="contact-email">
+            <a href="mailto:guifraanco@gmail.com" title="Enviar E-mail">
+                <i class="fas fa-envelope"></i>
+                <span>guifraanco@gmail.com</span>
+            </a>
+        </div>
+
+        <p class="cnh-tag"><i class="fas fa-id-card"></i> CNH Categoria B</p>
+
+        <div class="print-link">
+            <a href="https://shayttz.github.io/interative_curriculum/" target="_blank" style="color: #3498db; text-decoration: none;">
+                Clique ou aponte a câmera para ver a versão interativa:
+            </a>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://shayttz.github.io/interative_curriculum/" alt="QR Code Currículo Interativo" class="qr-code-img">
+        </div>
+
+        <div class="sidebar-menu">
+            <a href="#summary" class="menu-item active"><i class="fas fa-user-tie"></i> Resumo Profissional</a>
+            <a href="#skills" class="menu-item"><i class="fas fa-tools"></i> Competências Técnicas</a>
+            <a href="#experience" class="menu-item"><i class="fas fa-briefcase"></i> Experiência Profissional</a>
+            <a href="#education" class="menu-item"><i class="fas fa-graduation-cap"></i> Formação Acadêmica</a>
+            <a href="#languages" class="menu-item"><i class="fas fa-language"></i> Idiomas</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div id="summary" class="page-section active">
+            <h2>Resumo Profissional</h2>
+            <div class="summary-card">
+                Profissional com formação em Sistemas de Informação e sólida vivência operacional em rotinas de logística, conferência de estoque e recebimento de mercadorias. Experiência prática na conferência de Notas Fiscais, separação e embalagem de pedidos de vendas, organização e distribuição de carga em veículos para envio a diferentes localidades, além de reposição e movimentação de estoque. Habilitado com CNH Categoria B, perfil organizado, ágil no manuseio de cargas e com excelente domínio de sistemas de controle e pacote Office.
+            </div>
+        </div>
+
+        <div id="skills" class="page-section">
+            <h2>Competências Técnicas</h2>
+            <ul class="card-list">
+                <li>
+                    <h3><i class="fas fa-boxes skill-icon"></i>Logística & Expedição</h3>
+                    <p>Organização de carga em veículos de transporte, montagem de rotas de envio para diferentes localidades, separação de pedidos (picking) e embalagem.</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-clipboard-check skill-icon"></i>Estoque & Notas Fiscais</h3>
+                    <p>Recebimento e conferência de mercadorias, conferência física e fiscal de Notas Fiscais, contagem periódica de inventário e organização de prateleiras.</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-truck-loading skill-icon"></i>Condução & Transporte</h3>
+                    <p>Habilitado com CNH Categoria B. Prática na arrumação otimizada de cargas em utilitários/carros para garantir a integridade dos produtos no transporte.</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-desktop skill-icon"></i>Sistemas & Tecnologia</h3>
+                    <p>Formação acadêmica em Sistemas de Informação. Domínio técnico em sistemas de gestão de vendas/estoque, Excel avançado e registros operacionais.</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-headset skill-icon"></i>Atendimento & Suporte</h3>
+                    <p>Acompanhamento de pedidos junto aos clientes finais, comunicação rápida com motoristas e fornecedores, e resolução ágil de pendências de envio.</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-tools skill-icon"></i>Manutenção & Operação</h3>
+                    <p>Montagem, manuseio seguro de componentes e produtos, organização física do ambiente de estoque e suporte técnico operacional.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div id="experience" class="page-section">
+            <h2>Experiência Profissional</h2>
+            <ul class="card-list">
+                <li>
+                    <h3>Escapsul VR | Auxiliar de Logística e Vendas</h3>
+                    <p class="date">04/2023 – Atual</p>
+                    <ul>
+                        <li>Recebimento de mercadorias e conferência detalhada de Notas Fiscais e itens físicos.</li>
+                        <li>Controle e conferência diária de estoque, etiquetagem e organização física de peças.</li>
+                        <li>Separação de pedidos de vendas e organização estratégica de cargas em veículos para distribuição e envio a diversas localidades.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Deli Mix | Assistente de E-commerce e Expedição</h3>
+                    <p class="date">08/2022 – 02/2023</p>
+                    <ul>
+                        <li>Gerenciamento e triagem de pedidos de vendas online para faturamento e expedição.</li>
+                        <li>Atualização contínua do catálogo de produtos e controle de saldos de estoque.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Técnico de TI Autônomo | Freelancer</h3>
+                    <p class="date">2022 – Atual</p>
+                    <ul>
+                        <li>Consultoria e suporte técnico, montagem de infraestrutura e atendimento presencial e remoto.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Transportes Generoso | Estagiário de TI</h3>
+                    <p class="date">10/2021 – 04/2022</p>
+                    <ul>
+                        <li>Suporte operacional a sistemas internos e manutenção de equipamentos de TI corporativos.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>WMB Supermercados | Operador de Loja Intermitente</h3>
+                    <p class="date">06/2020 – 01/2021</p>
+                    <ul>
+                        <li>Recebimento, reposição de mercadorias em gôndolas e organização de produtos em estoque.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>SAAE Volta Redonda | Estagiário de Química</h3>
+                    <p class="date">02/2018 – 02/2020</p>
+                    <ul>
+                        <li>Análise laboratorial da qualidade da água, controle de amostras e elaboração de relatórios técnicos.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div id="education" class="page-section">
+            <h2>Formação Acadêmica</h2>
+            <ul class="card-list">
+                <li>
+                    <h3>Sistemas de Informação</h3>
+                    <p class="date">Universidade Estácio de Sá | 2018 – Concluído em 2024</p>
+                    <p>Bacharelado concluído com foco em arquitetura de sistemas, raciocínio lógico e gestão de bancos de dados.</p>
+                </li>
+                <li>
+                    <h3>Bacharelado em Química</h3>
+                    <p class="date">Universidade Federal Fluminense | Incompleto</p>
+                    <p>Desenvolvimento de raciocínio analítico, métodos de controle de qualidade e organização estruturada.</p>
+                </li>
+            </ul>
+        </div>
+
+        <div id="languages" class="page-section">
+            <h2>Idiomas</h2>
+            <ul class="card-list languages-list">
+                <li>
+                    <h3><i class="fas fa-check-circle skill-icon"></i>Português</h3>
+                    <p>Nativo</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-check-circle skill-icon"></i>Inglês</h3>
+                    <p>Fluente</p>
+                </li>
+                <li>
+                    <h3><i class="fas fa-check-circle skill-icon"></i>Espanhol</h3>
+                    <p>Intermediário</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuItems = document.querySelectorAll('.sidebar-menu a');
+        const sections = document.querySelectorAll('.page-section');
+
+        function showSection(id) {
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            const activeSection = document.querySelector(id);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+        }
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href');
+
+                menuItems.forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+
+                showSection(targetId);
+            });
+        });
+        
+        showSection('#summary');
+    });
+</script>
+
+</body>
+</html>
